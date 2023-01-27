@@ -27,7 +27,7 @@ def train(trainloader):
             x = x.to(device)
             optimizer.zero_grad()
             x_hat = model(x)
-            loss = loss_fn(torch.flatten(x_hat), torch.flatten(x))
+            loss = loss_fn(x_hat.view(-1,1,28,28), x)
             loss.backward()
             optimizer.step()
 
@@ -35,7 +35,6 @@ def train(trainloader):
 
         print(f'  [{epoch+1}, {index + 1:5d}] loss: {running_loss / len(trainloader):.4f}', flush=True)
         loss_vals.append(running_loss / len(trainloader))
-        # val_vals.append(validate(model, valloader))
 
         # save model and update loss figure every 5 epochs
         if epoch % 5 == 0:

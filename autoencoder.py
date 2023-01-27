@@ -6,7 +6,7 @@ Encoder network
 class Encoder(nn.Module):
     def __init__(self, input_size, latent_size):
         super().__init__()
-        depths =   (4,2,1)
+        depths =   (16,8,4,2,1)
         # define layers
         self.flatten = nn.Flatten()
         self.initial_linear = nn.Linear(input_size*input_size, input_size*depths[0])
@@ -28,7 +28,7 @@ Decoder network
 class Decoder(nn.Module):
     def __init__(self, input_size, latent_size):
         super().__init__()
-        depths =   (1,2,4)
+        depths =   (1,2,4,8,16)
         # define layers
         self.flatten = nn.Flatten()
         self.final_layer = nn.Linear(input_size*depths[-1], input_size*input_size)
